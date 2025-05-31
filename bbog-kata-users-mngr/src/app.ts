@@ -2,6 +2,7 @@ import express from 'express';
 import path from 'node:path';
 import { responseHandler } from 'express-intercept';
 import { deflateRawSync } from 'node:zlib';
+import { UsersController } from './controllers/users.controller';
 
 const app = express();
 app.disable('x-powered-by');
@@ -25,5 +26,7 @@ app.use(
 );
 
 const API_PATH = '/kata-users-mngr/V1';
+
+app.use(API_PATH, UsersController);
 
 export default app;
