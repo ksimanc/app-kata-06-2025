@@ -8,10 +8,17 @@ const updatedAt = pg
   .defaultNow()
   .$onUpdate(() => new Date());
 
-export const userRoles = ['Developer', 'Tester', 'Product Owner', 'Agile Coach', 'DevOps', 'UX/UI'] as const;
+export const userRoles = [
+  'Desarrollador',
+  'Analista de Calidad',
+  'Gestor de Producto',
+  'Agilista',
+  'Ingeniero(a) DevOps',
+  'Diseñador(a) de Experiencia',
+] as const;
 
 type UserRole = (typeof userRoles)[number];
-type UserStatus = 'pending' | 'approved' | 'rejected';
+type UserStatus = 'Pendiente' | 'Aprobado' | 'Rechazado';
 
 export const Users = pg.pgTable('users', {
   id: pg.serial().primaryKey(),
@@ -19,7 +26,7 @@ export const Users = pg.pgTable('users', {
   email: pg.text().notNull().unique(),
   area: pg.text().notNull(),
   role: pg.text().notNull().$type<UserRole>(),
-  status: pg.text().notNull().$type<UserStatus>().default('pending'),
+  status: pg.text().notNull().$type<UserStatus>().default('Pendiente'),
   createdAt,
   updatedAt,
 });
@@ -33,7 +40,7 @@ export const Applications = pg.pgTable('applications', {
   updatedAt,
 });
 
-type AccessRequestStatus = 'pending' | 'approved' | 'rejected' | 'cancelled';
+type AccessRequestStatus = 'Pendiente' | 'Aprobado' | 'Rechazado' | 'Cancelado';
 
 export const AccessRequests = pg.pgTable('access_requests', {
   id: pg.serial().primaryKey(),
@@ -45,25 +52,25 @@ export const AccessRequests = pg.pgTable('access_requests', {
     .integer()
     .notNull()
     .references(() => Applications.id),
-  status: pg.text().notNull().$type<AccessRequestStatus>().default('pending'),
+  status: pg.text().notNull().$type<AccessRequestStatus>().default('Pendiente'),
   comments: pg.text(),
   createdAt,
   updatedAt,
 });
 
-type ComputerStatus = 'available' | 'assigned' | 'maintenance';
+type ComputerStatus = 'Disponible' | 'Asignado' | 'En mantenimiento';
 
 export const Computers = pg.pgTable('computers', {
   id: pg.serial().primaryKey(),
   model: pg.text().notNull(),
   serialNumber: pg.text().notNull().unique(),
-  status: pg.text().notNull().$type<ComputerStatus>().default('available'),
+  status: pg.text().notNull().$type<ComputerStatus>().default('Disponible'),
   specifications: pg.jsonb(),
   createdAt,
   updatedAt,
 });
 
-type ComputerAssignmentStatus = 'active' | 'returned';
+type ComputerAssignmentStatus = 'Activo' | 'Devuelto';
 
 export const ComputerAssignments = pg.pgTable('computer_assignments', {
   id: pg.serial().primaryKey(),
@@ -76,7 +83,7 @@ export const ComputerAssignments = pg.pgTable('computer_assignments', {
     .notNull()
     .references(() => Computers.id),
   returnDate: pg.timestamp(),
-  status: pg.text().notNull().$type<ComputerAssignmentStatus>().default('active'),
+  status: pg.text().notNull().$type<ComputerAssignmentStatus>().default('Activo'),
   comments: pg.text(),
   createdAt,
   updatedAt,

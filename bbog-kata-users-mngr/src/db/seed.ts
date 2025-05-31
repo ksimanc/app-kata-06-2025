@@ -14,7 +14,7 @@ async function seedComputers() {
     {
       model: 'MacBook Pro 14"',
       serialNumber: 'MBP14-2023-001',
-      status: 'available',
+      status: 'Disponible',
       specifications: {
         processor: 'M2 Pro',
         ram: '16GB',
@@ -25,7 +25,7 @@ async function seedComputers() {
     {
       model: 'MacBook Pro 16"',
       serialNumber: 'MBP16-2023-001',
-      status: 'available',
+      status: 'Disponible',
       specifications: {
         processor: 'M2 Max',
         ram: '32GB',
@@ -36,7 +36,7 @@ async function seedComputers() {
     {
       model: 'Dell XPS 13',
       serialNumber: 'XPS13-2023-001',
-      status: 'available',
+      status: 'Disponible',
       specifications: {
         processor: 'Intel i7 13th Gen',
         ram: '32GB',
@@ -47,7 +47,7 @@ async function seedComputers() {
     {
       model: 'Dell XPS 15',
       serialNumber: 'XPS15-2023-001',
-      status: 'available',
+      status: 'Disponible',
       specifications: {
         processor: 'Intel i9 13th Gen',
         ram: '64GB',
@@ -58,7 +58,7 @@ async function seedComputers() {
     {
       model: 'ThinkPad X1 Carbon',
       serialNumber: 'X1C-2023-001',
-      status: 'maintenance',
+      status: 'En mantenimiento',
       specifications: {
         processor: 'Intel i7 13th Gen',
         ram: '16GB',
@@ -69,7 +69,7 @@ async function seedComputers() {
     {
       model: 'ThinkPad P1',
       serialNumber: 'P1-2023-001',
-      status: 'available',
+      status: 'Disponible',
       specifications: {
         processor: 'Intel i9 13th Gen',
         ram: '64GB',
@@ -80,7 +80,7 @@ async function seedComputers() {
     {
       model: 'HP EliteBook 840',
       serialNumber: 'EB840-2023-001',
-      status: 'available',
+      status: 'Disponible',
       specifications: {
         processor: 'Intel i7 13th Gen',
         ram: '32GB',
@@ -91,7 +91,7 @@ async function seedComputers() {
     {
       model: 'HP ZBook Studio',
       serialNumber: 'ZBS-2023-001',
-      status: 'available',
+      status: 'Disponible',
       specifications: {
         processor: 'Intel i9 13th Gen',
         ram: '64GB',
@@ -102,7 +102,7 @@ async function seedComputers() {
     {
       model: 'MacBook Air',
       serialNumber: 'MBA-2023-001',
-      status: 'available',
+      status: 'Disponible',
       specifications: {
         processor: 'M2',
         ram: '16GB',
@@ -113,7 +113,7 @@ async function seedComputers() {
     {
       model: 'Dell Precision 5570',
       serialNumber: 'DP5570-2023-001',
-      status: 'available',
+      status: 'Disponible',
       specifications: {
         processor: 'Intel i7 13th Gen',
         ram: '32GB',
@@ -138,97 +138,97 @@ async function seedApplications() {
     {
       name: 'GitHub Enterprise',
       description: 'Code repository and version control system',
-      requiredRole: 'Developer',
+      requiredRole: 'Desarrollador',
     },
     {
       name: 'Visual Studio Code',
       description: 'Integrated development environment',
-      requiredRole: 'Developer',
+      requiredRole: 'Desarrollador',
     },
     {
       name: 'IntelliJ IDEA',
       description: 'Java development environment',
-      requiredRole: 'Developer',
+      requiredRole: 'Desarrollador',
     },
 
     // Tester Applications
     {
       name: 'Selenium Grid',
       description: 'Automated testing platform',
-      requiredRole: 'Tester',
+      requiredRole: 'Analista de Calidad',
     },
     {
       name: 'TestRail',
       description: 'Test case management system',
-      requiredRole: 'Tester',
+      requiredRole: 'Analista de Calidad',
     },
     {
       name: 'JMeter',
       description: 'Performance testing tool',
-      requiredRole: 'Tester',
+      requiredRole: 'Analista de Calidad',
     },
 
     // Product Owner Applications
     {
       name: 'Jira',
       description: 'Project management and issue tracking system',
-      requiredRole: 'Product Owner',
+      requiredRole: 'Gestor de Producto',
     },
     {
       name: 'Aha!',
       description: 'Product roadmap software',
-      requiredRole: 'Product Owner',
+      requiredRole: 'Gestor de Producto',
     },
     {
       name: 'ProductPlan',
       description: 'Product planning and roadmap tool',
-      requiredRole: 'Product Owner',
+      requiredRole: 'Gestor de Producto',
     },
 
     // Agile Coach Applications
     {
       name: 'Miro',
       description: 'Online collaborative whiteboard platform',
-      requiredRole: 'Agile Coach',
+      requiredRole: 'Agilista',
     },
     {
       name: 'Retrium',
       description: 'Agile retrospective tool',
-      requiredRole: 'Agile Coach',
+      requiredRole: 'Agilista',
     },
 
     // DevOps Applications
     {
       name: 'Jenkins',
       description: 'Continuous Integration/Continuous Deployment platform',
-      requiredRole: 'DevOps',
+      requiredRole: 'Ingeniero(a) DevOps',
     },
     {
       name: 'Kubernetes Dashboard',
       description: 'Container orchestration platform UI',
-      requiredRole: 'DevOps',
+      requiredRole: 'Ingeniero(a) DevOps',
     },
     {
       name: 'Grafana',
       description: 'Metrics visualization and monitoring',
-      requiredRole: 'DevOps',
+      requiredRole: 'Ingeniero(a) DevOps',
     },
 
     // UX/UI Applications
     {
       name: 'Figma',
       description: 'Design and prototyping tool',
-      requiredRole: 'UX/UI',
+      requiredRole: 'Diseñador(a) de Experiencia',
     },
     {
       name: 'Adobe Creative Cloud',
       description: 'Suite of design tools including Photoshop and Illustrator',
-      requiredRole: 'UX/UI',
+      requiredRole: 'Diseñador(a) de Experiencia',
     },
     {
       name: 'Sketch',
       description: 'Digital design toolkit',
-      requiredRole: 'UX/UI',
+      requiredRole: 'Diseñador(a) de Experiencia',
     },
 
     // Applications with no role requirement
