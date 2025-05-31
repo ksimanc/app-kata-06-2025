@@ -1,0 +1,10 @@
+services:
+  users-mngr:
+    build:
+      context: ./bbog-kata-users-mngr
+      dockerfile: Dockerfile.dev
+    ports:
+      - '3000:3000'
+    environment:
+      - NODE_ENV=development
+    command: npm run dev
