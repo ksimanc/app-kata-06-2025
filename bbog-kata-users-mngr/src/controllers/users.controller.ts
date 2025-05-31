@@ -24,7 +24,7 @@ const users = [
 
 const UsersController = Router();
 
-UsersController.get('/users', (req: Request, res: Response) => {
+UsersController.get('/', (req: Request, res: Response) => {
   res.json(users);
 });
 

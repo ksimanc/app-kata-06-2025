@@ -1,1 +1,1 @@
-docker compose -f docker-compose.dev.yml up --build --remove-orphans
+docker compose -f compose.dev.yml up --build --remove-orphans

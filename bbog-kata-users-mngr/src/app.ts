@@ -27,6 +27,6 @@ app.use(
 
 const API_PATH = '/kata-users-mngr/V1';
 
-app.use(API_PATH, UsersController);
+app.use(`${API_PATH}/users`, UsersController);
 
 export default app;
