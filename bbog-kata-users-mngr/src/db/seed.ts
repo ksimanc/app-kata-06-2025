@@ -1,5 +1,5 @@
 import { db } from './index';
-import { Applications, Computers } from './schema';
+import { Applications, Computers, Users } from './schema';
 
 async function seedComputers() {
   // Check if computers table is empty
@@ -255,10 +255,94 @@ async function seedApplications() {
   ]);
 }
 
+async function seedUsers() {
+  // Check if users table is empty
+  const existingUsers = await db.select().from(Users).limit(1);
+
+  if (existingUsers.length > 0) {
+    console.log('Users table already has data, skipping seed');
+    return;
+  }
+
+  await db.insert(Users).values([
+    {
+      name: 'Juan Pérez',
+      email: 'juan.perez@katabank.com',
+      area: 'Tecnología',
+      role: 'Desarrollador',
+      status: 'Aprobado',
+    },
+    {
+      name: 'Ana Martínez',
+      email: 'ana.martinez@katabank.com',
+      area: 'QA',
+      role: 'Analista de Calidad',
+      status: 'Aprobado',
+    },
+    {
+      name: 'Carlos Rodríguez',
+      email: 'carlos.rodriguez@katabank.com',
+      area: 'Producto',
+      role: 'Gestor de Producto',
+      status: 'Aprobado',
+    },
+    {
+      name: 'María González',
+      email: 'maria.gonzalez@katabank.com',
+      area: 'Transformación',
+      role: 'Agilista',
+      status: 'Aprobado',
+    },
+    {
+      name: 'Diego López',
+      email: 'diego.lopez@katabank.com',
+      area: 'Infraestructura',
+      role: 'Ingeniero(a) DevOps',
+      status: 'Aprobado',
+    },
+    {
+      name: 'Laura Torres',
+      email: 'laura.torres@katabank.com',
+      area: 'Diseño',
+      role: 'Diseñador(a) de Experiencia',
+      status: 'Aprobado',
+    },
+    {
+      name: 'Andrés Sánchez',
+      email: 'andres.sanchez@katabank.com',
+      area: 'Tecnología',
+      role: 'Desarrollador',
+      status: 'Aprobado',
+    },
+    {
+      name: 'Sofia Ramírez',
+      email: 'sofia.ramirez@katabank.com',
+      area: 'QA',
+      role: 'Analista de Calidad',
+      status: 'Pendiente',
+    },
+    {
+      name: 'Daniel Morales',
+      email: 'daniel.morales@katabank.com',
+      area: 'Infraestructura',
+      role: 'Ingeniero(a) DevOps',
+      status: 'Rechazado',
+    },
+    {
+      name: 'Carmen Vargas',
+      email: 'carmen.vargas@katabank.com',
+      area: 'Diseño',
+      role: 'Diseñador(a) de Experiencia',
+      status: 'Pendiente',
+    },
+  ]);
+}
+
 export async function seed() {
   try {
     await seedComputers();
     await seedApplications();
+    await seedUsers();
     console.log('Seed process completed');
   } catch (error) {
     console.error('Error seeding data:', error);
