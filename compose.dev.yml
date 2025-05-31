@@ -13,7 +13,8 @@ services:
       - ./bbog-kata-users-mngr:/app
       - /app/node_modules
     depends_on:
-      - users-db
+      users-db:
+        condition: service_healthy
 
   users-web-ui:
     build:
@@ -37,6 +38,11 @@ services:
       - .env
     volumes:
       - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB']
+      interval: 5s
+      timeout: 5s
+      retries: 5
 
 volumes:
   postgres_data:
