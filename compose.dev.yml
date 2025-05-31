@@ -6,7 +6,7 @@ services:
     ports:
       - '3000:3000'
     env_file:
-      - .env
+      - .env.local
     environment:
       - NODE_ENV=${NODE_ENV}
     volumes:
@@ -34,7 +34,7 @@ services:
     ports:
       - '5432:5432'
     env_file:
-      - .env
+      - .env.local
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
