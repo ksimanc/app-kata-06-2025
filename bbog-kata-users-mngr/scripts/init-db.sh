@@ -11,7 +11,8 @@ wait_for_postgres() {
 
 # Function to check if database is initialized
 check_db_initialized() {
-  PGPASSWORD=$POSTGRES_PASSWORD psql -h users-db -U $POSTGRES_USER -d $POSTGRES_DB -c "SELECT EXISTS (SELECT FROM information_schema.tables WHERE table_name = 'users')" | grep -q 't'
+  result=$(PGPASSWORD=$POSTGRES_PASSWORD psql -h users-db -U $POSTGRES_USER -d $POSTGRES_DB -t -A -c "SELECT EXISTS (SELECT FROM information_schema.tables WHERE table_name = 'users')")
+  [ "$result" = "t" ]
   return $?
 }
 
@@ -20,7 +21,7 @@ wait_for_postgres
 
 # Check if database needs initialization
 if check_db_initialized; then
-  echo "Database already initialized, skipping migrations and seeding..."
+  echo "Database already initialized, skipping migrations..."
 else
   echo "Fresh database detected, running migrations and seeding..."
 
@@ -28,11 +29,11 @@ else
   echo "Running database migrations..."
   npm run db:generate
   npm run db:migrate
-
-  # Run database seeding
-  echo "Running database seeding..."
-  node -r tsx/register src/db/seed.ts
 fi
+
+# Run database seeding
+echo "Running database seeding..."
+npm run db:seed
 
 # Start the application
 exec "$@"

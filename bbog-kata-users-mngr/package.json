@@ -4,7 +4,7 @@
   "main": "build/bin/www.js",
   "scripts": {
     "build": "tsc",
-    "start": "npm run build && export DEBUG=bdb:* && ts-node -r tsconfig-paths/register src/bin/www.ts",
+    "start": "npm run build && node build/bin/www.js",
     "dev": "tsx watch src/bin/www.ts",
     "test": "vitest run",
     "test:debug": "DEBUG=* npm test",
@@ -12,7 +12,8 @@
     "coverage": "vitest run --coverage",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",
-    "db:seed": "node -r tsx/register src/db/seed.ts",
+    "db:seed": "tsx src/db/seed.ts",
+    "db:studio": "drizzle-kit studio",
     "lint": "eslint '*/**/*.{js,ts,tsx}'",
     "lint:fix": "npx eslint '*/**/*.ts' --fix",
     "prettier:all": "prettier \"**/*.{ts,json,html,scss,md}\" --write",

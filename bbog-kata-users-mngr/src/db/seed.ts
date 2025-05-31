@@ -1,7 +1,15 @@
 import { db } from './index';
 import { Applications, Computers } from './schema';
 
-export async function seedComputers() {
+async function seedComputers() {
+  // Check if computers table is empty
+  const existingComputers = await db.select().from(Computers).limit(1);
+
+  if (existingComputers.length > 0) {
+    console.log('Computers table already has data, skipping seed');
+    return;
+  }
+
   await db.insert(Computers).values([
     {
       model: 'MacBook Pro 14"',
@@ -116,7 +124,15 @@ export async function seedComputers() {
   ]);
 }
 
-export async function seedApplications() {
+async function seedApplications() {
+  // Check if applications table is empty
+  const existingApplications = await db.select().from(Applications).limit(1);
+
+  if (existingApplications.length > 0) {
+    console.log('Applications table already has data, skipping seed');
+    return;
+  }
+
   await db.insert(Applications).values([
     // Developer Applications
     {
@@ -243,9 +259,15 @@ export async function seed() {
   try {
     await seedComputers();
     await seedApplications();
-    console.log('Seed data inserted successfully');
+    console.log('Seed process completed');
   } catch (error) {
     console.error('Error seeding data:', error);
     throw error;
   }
+}
+
+// Run seed when this file is executed directly
+// Using CommonJS, so check if this is the main module
+if (require.main === module) {
+  seed();
 }

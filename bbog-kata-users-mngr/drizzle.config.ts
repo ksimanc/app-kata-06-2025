@@ -1,10 +1,8 @@
 import { defineConfig } from 'drizzle-kit';
 import config from './src/config';
 
-process.loadEnvFile();
-
 export default defineConfig({
-  out: './drizzle',
+  out: './.drizzle',
   schema: './src/db/schema.ts',
   casing: 'snake_case',
   dialect: 'postgresql',
@@ -14,5 +12,6 @@ export default defineConfig({
     database: config.database.NAME,
     user: config.database.USER,
     password: config.database.PASSWORD,
+    ssl: false,
   },
 });
