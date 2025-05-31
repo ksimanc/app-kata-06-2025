@@ -7,4 +7,20 @@ services:
       - '3000:3000'
     environment:
       - NODE_ENV=development
-    command: npm run dev
+    volumes:
+      - ./bbog-kata-users-mngr:/app
+      - /app/node_modules
+
+  users-web-ui:
+    build:
+      context: ./bbog-kata-users-web-ui
+      dockerfile: Dockerfile.dev
+    ports:
+      - '4200:4200'
+    environment:
+      - NODE_ENV=development
+    volumes:
+      - ./bbog-kata-users-web-ui:/app
+      - /app/node_modules
+    depends_on:
+      - users-mngr
