@@ -1,5 +1,5 @@
 import { db } from './index';
-import { Applications, Computers, Users } from './schema';
+import { Apps, Computers, Users } from './schema';
 
 async function seedComputers() {
   // Check if computers table is empty
@@ -124,17 +124,17 @@ async function seedComputers() {
   ]);
 }
 
-async function seedApplications() {
-  // Check if applications table is empty
-  const existingApplications = await db.select().from(Applications).limit(1);
+async function seedApps() {
+  // Check if apps table is empty
+  const existingApps = await db.select().from(Apps).limit(1);
 
-  if (existingApplications.length > 0) {
-    console.log('Applications table already has data, skipping seed');
+  if (existingApps.length > 0) {
+    console.log('Apps table already has data, skipping seed');
     return;
   }
 
-  await db.insert(Applications).values([
-    // Developer Applications
+  await db.insert(Apps).values([
+    // Developer Apps
     {
       name: 'GitHub Enterprise',
       description: 'Code repository and version control system',
@@ -151,7 +151,7 @@ async function seedApplications() {
       requiredRole: 'Desarrollador',
     },
 
-    // Tester Applications
+    // Tester Apps
     {
       name: 'Selenium Grid',
       description: 'Automated testing platform',
@@ -168,7 +168,7 @@ async function seedApplications() {
       requiredRole: 'Analista de Calidad',
     },
 
-    // Product Owner Applications
+    // Product Owner Apps
     {
       name: 'Jira',
       description: 'Project management and issue tracking system',
@@ -185,7 +185,7 @@ async function seedApplications() {
       requiredRole: 'Gestor de Producto',
     },
 
-    // Agile Coach Applications
+    // Agile Coach Apps
     {
       name: 'Miro',
       description: 'Online collaborative whiteboard platform',
@@ -197,7 +197,7 @@ async function seedApplications() {
       requiredRole: 'Agilista',
     },
 
-    // DevOps Applications
+    // DevOps Apps
     {
       name: 'Jenkins',
       description: 'Continuous Integration/Continuous Deployment platform',
@@ -214,7 +214,7 @@ async function seedApplications() {
       requiredRole: 'Ingeniero(a) DevOps',
     },
 
-    // UX/UI Applications
+    // UX/UI Apps
     {
       name: 'Figma',
       description: 'Design and prototyping tool',
@@ -231,7 +231,7 @@ async function seedApplications() {
       requiredRole: 'Diseñador(a) de Experiencia',
     },
 
-    // Applications with no role requirement
+    // Apps with no role requirement
     {
       name: 'Slack',
       description: 'Team communication platform',
@@ -341,7 +341,7 @@ async function seedUsers() {
 export async function seed() {
   try {
     await seedComputers();
-    await seedApplications();
+    await seedApps();
     await seedUsers();
     console.log('Seed process completed');
   } catch (error) {

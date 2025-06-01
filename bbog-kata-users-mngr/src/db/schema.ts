@@ -31,7 +31,7 @@ export const Users = pg.pgTable('users', {
   updatedAt,
 });
 
-export const Applications = pg.pgTable('applications', {
+export const Apps = pg.pgTable('apps', {
   id: pg.serial().primaryKey(),
   name: pg.text().notNull(),
   description: pg.text(),
@@ -48,10 +48,10 @@ export const AccessRequests = pg.pgTable('access_requests', {
     .integer()
     .notNull()
     .references(() => Users.id),
-  applicationId: pg
+  appId: pg
     .integer()
     .notNull()
-    .references(() => Applications.id),
+    .references(() => Apps.id),
   status: pg.text().notNull().$type<AccessRequestStatus>().default('Pendiente'),
   comments: pg.text(),
   createdAt,
