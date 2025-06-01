@@ -1,31 +1,30 @@
 import { Request, Response, Router } from 'express';
-
-// Dummy user data
-const users = [
-  {
-    id: 1,
-    name: 'John Doe',
-    email: 'john@example.com',
-    role: 'user',
-  },
-  {
-    id: 2,
-    name: 'Jane Smith',
-    email: 'jane@example.com',
-    role: 'admin',
-  },
-  {
-    id: 3,
-    name: 'Bob Wilson',
-    email: 'bob@example.com',
-    role: 'user',
-  },
-];
+import { UsersService } from '../services/users.service';
 
 const UsersController = Router();
 
-UsersController.get('/', (req: Request, res: Response) => {
-  res.json(users);
+UsersController.get('/', async (req: Request, res: Response) => {
+  try {
+    const page = parseInt(req.query.page as string) || 1;
+    const users = await UsersService.listUsers(page);
+
+    res.json(users);
+  } catch (error) {
+    console.log(error);
+    res.send(500).send(error + '');
+  }
+});
+
+UsersController.post('/', async (req: Request, res: Response) => {
+  try {
+    const userData = req.body;
+    const createdUser = await UsersService.registerUser(userData);
+
+    res.status(201).json(createdUser);
+  } catch (error) {
+    console.log(error);
+    res.send(500).send(error + '');
+  }
 });
 
 export { UsersController };
