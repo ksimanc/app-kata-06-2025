@@ -137,120 +137,120 @@ async function seedApps() {
     // Developer Apps
     {
       name: 'GitHub Enterprise',
-      description: 'Code repository and version control system',
+      description: 'Sistema de control de versiones y repositorio de código',
       requiredRole: 'Desarrollador',
     },
     {
       name: 'Visual Studio Code',
-      description: 'Integrated development environment',
+      description: 'Entorno de desarrollo integrado',
       requiredRole: 'Desarrollador',
     },
     {
       name: 'IntelliJ IDEA',
-      description: 'Java development environment',
+      description: 'Entorno de desarrollo para Java',
       requiredRole: 'Desarrollador',
     },
 
     // Tester Apps
     {
       name: 'Selenium Grid',
-      description: 'Automated testing platform',
+      description: 'Plataforma de pruebas automatizadas',
       requiredRole: 'Analista de Calidad',
     },
     {
       name: 'TestRail',
-      description: 'Test case management system',
+      description: 'Sistema de gestión de casos de prueba',
       requiredRole: 'Analista de Calidad',
     },
     {
       name: 'JMeter',
-      description: 'Performance testing tool',
+      description: 'Herramienta de pruebas de rendimiento',
       requiredRole: 'Analista de Calidad',
     },
 
     // Product Owner Apps
     {
       name: 'Jira',
-      description: 'Project management and issue tracking system',
+      description: 'Sistema de gestión de proyectos y seguimiento de incidencias',
       requiredRole: 'Gestor de Producto',
     },
     {
       name: 'Aha!',
-      description: 'Product roadmap software',
+      description: 'Software de planificación de producto',
       requiredRole: 'Gestor de Producto',
     },
     {
       name: 'ProductPlan',
-      description: 'Product planning and roadmap tool',
+      description: 'Herramienta de planificación y hoja de ruta de productos',
       requiredRole: 'Gestor de Producto',
     },
 
     // Agile Coach Apps
     {
       name: 'Miro',
-      description: 'Online collaborative whiteboard platform',
+      description: 'Plataforma colaborativa de pizarra virtual',
       requiredRole: 'Agilista',
     },
     {
       name: 'Retrium',
-      description: 'Agile retrospective tool',
+      description: 'Herramienta para retrospectivas ágiles',
       requiredRole: 'Agilista',
     },
 
     // DevOps Apps
     {
       name: 'Jenkins',
-      description: 'Continuous Integration/Continuous Deployment platform',
+      description: 'Plataforma de Integración Continua y Despliegue Continuo',
       requiredRole: 'Ingeniero(a) DevOps',
     },
     {
       name: 'Kubernetes Dashboard',
-      description: 'Container orchestration platform UI',
+      description: 'Interfaz de usuario para plataforma de orquestación de contenedores',
       requiredRole: 'Ingeniero(a) DevOps',
     },
     {
       name: 'Grafana',
-      description: 'Metrics visualization and monitoring',
+      description: 'Visualización y monitoreo de métricas',
       requiredRole: 'Ingeniero(a) DevOps',
     },
 
     // UX/UI Apps
     {
       name: 'Figma',
-      description: 'Design and prototyping tool',
+      description: 'Herramienta de diseño y prototipado',
       requiredRole: 'Diseñador(a) de Experiencia',
     },
     {
       name: 'Adobe Creative Cloud',
-      description: 'Suite of design tools including Photoshop and Illustrator',
+      description: 'Suite de herramientas de diseño que incluye Photoshop e Illustrator',
       requiredRole: 'Diseñador(a) de Experiencia',
     },
     {
       name: 'Sketch',
-      description: 'Digital design toolkit',
+      description: 'Kit de herramientas de diseño digital',
       requiredRole: 'Diseñador(a) de Experiencia',
     },
 
     // Apps with no role requirement
     {
       name: 'Slack',
-      description: 'Team communication platform',
+      description: 'Plataforma de comunicación en equipo',
     },
     {
       name: 'Microsoft Office 365',
-      description: 'Office productivity suite',
+      description: 'Suite de productividad de oficina',
     },
     {
       name: 'Zoom',
-      description: 'Video conferencing platform',
+      description: 'Plataforma de videoconferencias',
     },
     {
       name: 'Google Workspace',
-      description: 'Cloud-based productivity and collaboration tools',
+      description: 'Herramientas de productividad y colaboración en la nube',
     },
     {
       name: 'LastPass',
-      description: 'Password management system',
+      description: 'Sistema de gestión de contraseñas',
     },
   ]);
 }
