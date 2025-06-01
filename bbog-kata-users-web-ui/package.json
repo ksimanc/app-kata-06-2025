@@ -18,6 +18,8 @@
     "@angular/platform-browser": "^19.2.14",
     "@angular/platform-browser-dynamic": "^19.2.14",
     "@angular/router": "^19.2.14",
+    "@npm-bbta/bbog-dig-dt-sherpa-lib": "^6.2.3",
+    "@npm-bbta/sdk-ae-frontend-utils-logs-lib": "^2.1.0-beta",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.15.1"

@@ -20,6 +20,9 @@ services:
     build:
       context: ./bbog-kata-users-web-ui
       dockerfile: Dockerfile.dev
+      args:
+        - ARTIFACTORY_READER_USER=${ARTIFACTORY_READER_USER}
+        - ARTIFACTORY_READER_API_KEY=${ARTIFACTORY_READER_API_KEY}
     ports:
       - '4200:4200'
     environment:
