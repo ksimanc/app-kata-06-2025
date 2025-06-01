@@ -1,5 +1,5 @@
-# Use Node.js LTS version as the base image
-FROM node:22-alpine
+# Build stage
+FROM node:22-alpine AS builder
 
 # Install curl which is needed for Artifactory authentication
 RUN apk add --no-cache curl
@@ -22,6 +22,15 @@ RUN sh scripts/install-dependencies.sh
 
 # Copy the rest of the application code
 COPY . .
+
+# Development stage
+FROM node:22-alpine AS development
+
+# Set working directory
+WORKDIR /app
+
+# Copy from builder stage
+COPY --from=builder /app /app
 
 # Expose port 4200 for the development server
 EXPOSE 4200
