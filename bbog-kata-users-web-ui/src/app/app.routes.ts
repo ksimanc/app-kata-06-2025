@@ -4,24 +4,24 @@ export const routes: Routes = [
   {
     path: '',
     title: 'Home',
-    loadComponent: () => import('./components/home/home.component').then((m) => m.HomeComponent),
+    loadComponent: () => import('./modules/home/home.component').then((m) => m.HomeComponent),
   },
   {
     path: 'users',
     title: 'Usuarios',
-    loadComponent: () => import('./components/users/users.component').then((m) => m.UsersComponent),
+    loadComponent: () => import('./modules/users/users.component').then((m) => m.UsersComponent),
   },
   {
     path: 'access-requests',
     title: 'Solicitudes de Acceso',
     loadComponent: () =>
-      import('./components/access-requests/access-request.component').then((m) => m.AccessRequestComponent),
+      import('./modules/access-requests/access-request.component').then((m) => m.AccessRequestComponent),
     children: [
       {
         path: '',
         title: 'Solicitudes de Acceso',
         loadComponent: () =>
-          import('./components/access-requests/list-requests/list-requests.component').then(
+          import('./modules/access-requests/list-requests/list-requests.component').then(
             (m) => m.ListRequestsComponent
           ),
       },
@@ -29,7 +29,7 @@ export const routes: Routes = [
         path: 'new',
         title: 'Nueva Solicitud',
         loadComponent: () =>
-          import('./components/access-requests/new-request/new-request.component').then((m) => m.NewRequestComponent),
+          import('./modules/access-requests/new-request/new-request.component').then((m) => m.NewRequestComponent),
       },
     ],
   },
