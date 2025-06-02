@@ -1,0 +1,10 @@
+<sp-ml-multi-selector
+  is-check
+  label="Selecciona las apps"
+  [valuesToCard]="availableApps"
+  (onCardChecked)="handleSelection($event)"
+></sp-ml-multi-selector>
+
+<div></div>
+
+<button class="sp-at-btn sp-at-btn--primary sp-at-btn--lg" (click)="requestAccess()">Enviar solicitud</button>

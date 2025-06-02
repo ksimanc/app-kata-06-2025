@@ -1,4 +1,4 @@
-import { count, desc } from 'drizzle-orm';
+import { and, count, desc, eq, ilike } from 'drizzle-orm';
 import { db } from '../db';
 import { Users } from '../db/schema';
 import { RegisterUserInput } from '../model/user';
@@ -17,6 +17,14 @@ class UsersServiceClass {
   async countUsers() {
     const [res] = await db.select({ count: count(Users.id) }).from(Users);
     return res.count;
+  }
+
+  async searchUser(query: string) {
+    return db
+      .select({ id: Users.id, name: Users.name, role: Users.role })
+      .from(Users)
+      .where(and(ilike(Users.name, `%${query}%`), eq(Users.status, 'Aprobado')))
+      .limit(10);
   }
 }
 

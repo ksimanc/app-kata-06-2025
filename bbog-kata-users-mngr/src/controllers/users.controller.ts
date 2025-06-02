@@ -17,6 +17,19 @@ UsersController.get('/', async (req: Request, res: Response) => {
   }
 });
 
+UsersController.get('/search', async (req: Request, res: Response) => {
+  try {
+    const query = req.query.q as string;
+
+    res.json({
+      users: await UsersService.searchUser(query),
+    });
+  } catch (error) {
+    console.log(error);
+    res.send(500).send(error + '');
+  }
+});
+
 UsersController.post('/', async (req: Request, res: Response) => {
   try {
     const userData = req.body;

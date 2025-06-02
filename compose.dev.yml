@@ -30,8 +30,6 @@ services:
     volumes:
       - ./bbog-kata-users-web-ui:/app
       - /app/node_modules
-    depends_on:
-      - users-mngr
 
   users-db:
     image: postgres:15-alpine

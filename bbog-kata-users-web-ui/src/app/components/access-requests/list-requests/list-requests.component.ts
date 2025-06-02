@@ -1,20 +1,19 @@
 import { Component, CUSTOM_ELEMENTS_SCHEMA, ElementRef, inject, OnInit, ViewChild } from '@angular/core';
-import { environment } from '../../../environment/environment';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
+import { Components } from '@npm-bbta/bbog-dig-dt-sherpa-lib';
 import { map } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
-import { NewUserComponent } from './components/new-user.component';
-import { Components } from '@npm-bbta/bbog-dig-dt-sherpa-lib';
+import { environment } from '../../../../environment/environment';
 
 @Component({
-  selector: 'app-users',
+  selector: 'app-list-requests',
   standalone: true,
-  templateUrl: './users.component.html',
-  imports: [AsyncPipe, NewUserComponent],
-  styleUrls: ['./users.component.scss'],
+  imports: [AsyncPipe],
+  templateUrl: './list-requests.component.html',
+  styleUrls: ['./list-requests.component.scss'],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class UsersComponent implements OnInit {
+export class ListRequestsComponent implements OnInit {
   private readonly route = inject(ActivatedRoute);
   private readonly router = inject(Router);
 
@@ -44,21 +43,22 @@ export class UsersComponent implements OnInit {
   });
 
   async listUsers() {
-    const endpoint = `${environment.apiUrl}/kata-users-mngr/V1/users?page=${this.currentPage}`;
+    const endpoint = `${environment.apiUrl}/kata-users-mngr/V1/apps/access-request?page=${this.currentPage}`;
 
     const res = await fetch(endpoint);
     const data = await res.json();
 
     this.pages = Math.ceil(data.total / 10);
 
-    this.tableItems = data.users.map((user: any) => ({
-      id: user.id,
+    this.tableItems = data.accessRequests.map((r: any) => ({
+      id: r.id,
       Check: { value: 'checked', isChecked: 'false' },
-      user: user.name,
-      area: user.area,
-      role: user.role,
-      status: { type: this.getStatusType(user.status), text: user.status },
-      createdAt: this.dateFmt.format(new Date(user.createdAt)),
+      user: r.user.name,
+      area: r.user.area,
+      role: r.user.role,
+      app: r.app.name,
+      status: { type: this.getStatusType(r.status), text: r.status },
+      createdAt: this.dateFmt.format(new Date(r.createdAt)),
     }));
   }
 
@@ -75,8 +75,8 @@ export class UsersComponent implements OnInit {
     }
   }
 
-  openDrawer() {
-    this.drawerRef?.nativeElement.openDrawer();
+  gotoNew() {
+    this.router.navigate(['new'], { relativeTo: this.route });
   }
 
   handleUserCreated() {
@@ -89,6 +89,7 @@ export class UsersComponent implements OnInit {
       case 'Aprobado':
         return 'success';
       case 'Rechazado':
+      case 'Cancelado':
         return 'error';
       case 'Pendiente':
         return 'warning';

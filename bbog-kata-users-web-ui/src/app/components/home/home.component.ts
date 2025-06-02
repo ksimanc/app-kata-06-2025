@@ -16,7 +16,7 @@ export class HomeComponent {
   }
 
   goToAccessRequest() {
-    console.log('Solicitar acceso');
+    this.router.navigate(['access-requests']);
   }
 
   goToAssignComputer() {

@@ -1,0 +1,16 @@
+<h1 class="sp-text-heading-4">Solicitar Permisos en Apps</h1>
+
+<sp-at-autocomplete
+  required="true"
+  label="Label"
+  placeholder="Placeholder"
+  status="ENABLED"
+  message=""
+  [options]="usersOptions"
+  (eventQueryChanged)="updateQuery($event.detail.text)"
+  (eventOptionSelected)="selectedUserId = $event.detail.value"
+></sp-at-autocomplete>
+
+@if (selectedUserId) {
+<app-request-form [userId]="selectedUserId" (submit)="gotoList()"></app-request-form>
+}

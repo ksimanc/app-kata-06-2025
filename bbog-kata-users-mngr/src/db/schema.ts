@@ -17,7 +17,7 @@ export const userRoles = [
   'Diseñador(a) de Experiencia',
 ] as const;
 
-type UserRole = (typeof userRoles)[number];
+export type UserRole = (typeof userRoles)[number];
 type UserStatus = 'Pendiente' | 'Aprobado' | 'Rechazado';
 
 export const Users = pg.pgTable('users', {

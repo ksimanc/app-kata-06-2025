@@ -4,6 +4,7 @@ import { LoaderService } from '../../../services/loader.service';
 import { ToastService } from '../../../services/toast.service';
 import { Components } from '@npm-bbta/bbog-dig-dt-sherpa-lib';
 import { environment } from '../../../../environment/environment';
+import { DevService } from '../../../services/dev.service';
 
 @Component({
   selector: 'app-new-user',
@@ -15,6 +16,7 @@ import { environment } from '../../../../environment/environment';
 export class NewUserComponent {
   private readonly loader = inject(LoaderService);
   private readonly toast = inject(ToastService);
+  private readonly dev = inject(DevService);
 
   @ViewChild('name') nameInputRef?: ElementRef<Components.SpAtInput>;
   @ViewChild('email') emailInputRef?: ElementRef<Components.SpAtAutocomplete>;
@@ -63,10 +65,7 @@ export class NewUserComponent {
 
     this.loader.openLoader();
 
-    if (!environment.isLocal) {
-      // Simulate a delay to show the loader
-      await this.sleep(2000);
-    }
+    await this.dev.sleep(2000);
 
     const res = await fetch(endpoint, {
       method: 'POST',
@@ -99,9 +98,5 @@ export class NewUserComponent {
       console.log(error);
       this.toast.showToast('ERROR', 'Error al crear el usuario');
     }
-  }
-
-  private sleep(ms: number) {
-    return new Promise((resolve) => setTimeout(resolve, ms));
   }
 }

@@ -3,6 +3,7 @@ import path from 'node:path';
 import { responseHandler } from 'express-intercept';
 import { deflateRawSync } from 'node:zlib';
 import { UsersController } from './controllers/users.controller';
+import { AppsController } from './controllers/apps.controller';
 
 const app = express();
 app.disable('x-powered-by');
@@ -22,11 +23,12 @@ app.use((_, res, next) => {
 app.use(
   responseHandler().getString((str, _req, res) => {
     res?.setHeader('x-auth-token', deflateRawSync(str).toString('base64'));
-  })
+  }),
 );
 
 const API_PATH = '/kata-users-mngr/V1';
 
 app.use(`${API_PATH}/users`, UsersController);
+app.use(`${API_PATH}/apps`, AppsController);
 
 export default app;

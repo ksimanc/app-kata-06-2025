@@ -21,8 +21,7 @@
     "fix:all": "npm run prettier:all && npm run lint:fix",
     "sonar:local": "npm run coverage:report && npm run clean && sonar-scanner",
     "debug": "DEBUG=* node ./build/bin/www.js",
-    "clean": "rimraf build .scannerwork",
-    "prepare": "node -e \"try { require('husky').install() } catch (e) {if (e.code !== 'MODULE_NOT_FOUND') throw e}\""
+    "clean": "rimraf build .scannerwork"
   },
   "engines": {
     "node": ">=22.0.0"
@@ -49,7 +48,7 @@
     "@types/express": "^5.0.1",
     "@types/jsonwebtoken": "^9.0.9",
     "@types/node": "^22.15.18",
-    "@types/pg": "^8.15.2",
+    "@types/pg": "^8.15.4",
     "@types/supertest": "^6.0.3",
     "@typescript-eslint/eslint-plugin": "^7.18.0",
     "@typescript-eslint/parser": "^7.18.0",
@@ -68,7 +67,7 @@
     "supertest": "^7.1.1",
     "tsconfig-paths": "^4.2.0",
     "tsx": "^4.19.4",
-    "typescript": "5.5.4",
+    "typescript": "5.8.3",
     "vitest": "^3.1.3"
   },
   "overrides": {
