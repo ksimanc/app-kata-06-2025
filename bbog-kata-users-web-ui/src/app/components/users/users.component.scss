@@ -1,0 +1,13 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1rem;
+  width: 50em;
+  align-items: stretch;
+  margin-inline: auto;
+}
+
+.sp-text-heading-4 {
+  text-align: center;
+}

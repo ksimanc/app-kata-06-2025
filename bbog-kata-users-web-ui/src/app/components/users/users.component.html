@@ -1,0 +1,23 @@
+<h1 class="sp-text-heading-4">Gestión de Usuarios</h1>
+
+<sp-ml-dynamic-table
+  [columnTable]="[
+    { colName: '', control: 'id' },
+    { colName: '', control: 'checkbox' },
+    { colName: 'Usuario', control: 'text' },
+    { colName: 'Rol', control: 'text' },
+    { colName: 'Estado', control: 'tag' },
+    { colName: 'Fecha de ingreso', control: 'date' }
+  ]"
+  [rowTable]="tableItems"
+></sp-ml-dynamic-table>
+
+<div></div>
+
+<div style="margin-left: auto">
+  <sp-ml-pagination
+    total="{{ pages }}"
+    start="{{ currentPage$ | async }}"
+    (spMlPaginationUpdate)="gotoPage($event.detail.start)"
+  ></sp-ml-pagination>
+</div>

@@ -1,5 +1,5 @@
-import { Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component, CUSTOM_ELEMENTS_SCHEMA, inject } from '@angular/core';
+import { Router, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -12,7 +12,9 @@ import { RouterOutlet } from '@angular/router';
 export class AppComponent {
   showBackBtn = true;
 
+  private readonly router = inject(Router);
+
   goToHome() {
-    console.log('Volver a la página de inicio');
+    this.router.navigate(['']);
   }
 }

@@ -1,15 +1,18 @@
-import { Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { Component, CUSTOM_ELEMENTS_SCHEMA, inject } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-root',
+  selector: 'app-home',
   standalone: true,
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class HomeComponent {
+  private readonly router = inject(Router);
+
   goToCreateUser() {
-    console.log('Crear usuario');
+    this.router.navigate(['users']);
   }
 
   goToAccessRequest() {

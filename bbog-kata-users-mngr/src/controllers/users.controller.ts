@@ -6,9 +6,11 @@ const UsersController = Router();
 UsersController.get('/', async (req: Request, res: Response) => {
   try {
     const page = parseInt(req.query.page as string) || 1;
-    const users = await UsersService.listUsers(page);
 
-    res.json(users);
+    res.json({
+      users: await UsersService.listUsers(page),
+      total: await UsersService.countUsers(),
+    });
   } catch (error) {
     console.log(error);
     res.send(500).send(error + '');
