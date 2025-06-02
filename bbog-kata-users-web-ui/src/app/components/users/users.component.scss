@@ -8,6 +8,16 @@
   margin-inline: auto;
 }
 
+.buttons {
+  display: flex;
+  justify-content: end;
+  gap: 1rem;
+
+  button {
+    width: fit-content;
+  }
+}
+
 .sp-text-heading-4 {
   text-align: center;
 }

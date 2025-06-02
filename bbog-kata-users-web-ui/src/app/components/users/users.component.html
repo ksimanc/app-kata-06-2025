@@ -1,5 +1,12 @@
 <h1 class="sp-text-heading-4">Gestión de Usuarios</h1>
 
+<div class="buttons">
+  <button class="sp-at-btn sp-at-btn--tertiary sp-at-btn--lg--ico" (click)="openDrawer()">
+    <span class="ico-avartars-profile-settings"></span>
+    Registrar usuario
+  </button>
+</div>
+
 <sp-ml-dynamic-table
   [columnTable]="[
     { colName: '', control: 'id' },
@@ -21,3 +28,7 @@
     (spMlPaginationUpdate)="gotoPage($event.detail.start)"
   ></sp-ml-pagination>
 </div>
+
+<sp-ml-drawer size-drawer="md" title-drawer="Registrar nuevo usuario" #drawer>
+  <app-new-user slot="bodyDrawer" (submit)="handleUserCreated()"></app-new-user>
+</sp-ml-drawer>

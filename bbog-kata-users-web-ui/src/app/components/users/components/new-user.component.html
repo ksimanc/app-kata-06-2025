@@ -1,0 +1,45 @@
+<sp-at-input
+  label="Nombre"
+  message=""
+  placeholder="Nombre completo del colaborador"
+  type="TEXT"
+  status="ENABLED"
+  required="true"
+  (atInputChanged)="userData.name = $event.detail.value"
+></sp-at-input>
+
+<sp-at-autocomplete
+  label="Correo electrónico"
+  message="Correo inválido"
+  placeholder="example@domain.com"
+  type="EMAIL"
+  status="ENABLED"
+  required="true"
+  [emailComplements]="['@gmail.com', '@hotmail.com', '@outlook.com', '@msn.com', '@yahoo.com']"
+  (atInputChanged)="updateEmail($event)"
+></sp-at-autocomplete>
+
+<sp-at-input
+  label="Area"
+  message=""
+  placeholder="Area en que trabajará el colaborador"
+  type="TEXT"
+  status="ENABLED"
+  required="true"
+  (atInputChanged)="userData.area = $event.detail.value"
+></sp-at-input>
+
+<sp-at-dropdown
+  name="1"
+  label="Rol"
+  status="HELP"
+  placeholder="Selecciona"
+  [options]="roleOptions"
+  (elementSelectedAtom)="userData.role = $event.detail.value"
+></sp-at-dropdown>
+
+<div></div>
+
+<button class="sp-at-btn sp-at-btn--primary sp-at-btn--lg" (click)="registerUser()" [disabled]="!showBtn">
+  Registrar
+</button>

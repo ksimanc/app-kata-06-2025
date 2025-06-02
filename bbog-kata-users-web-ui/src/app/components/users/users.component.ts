@@ -1,20 +1,25 @@
-import { Component, CUSTOM_ELEMENTS_SCHEMA, inject, OnInit } from '@angular/core';
+import { Component, CUSTOM_ELEMENTS_SCHEMA, ElementRef, inject, OnInit, ViewChild } from '@angular/core';
 import { environment } from '../../../environment/environment';
 import { ActivatedRoute, Router } from '@angular/router';
 import { map } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
+import { NewUserComponent } from './components/new-user.component';
+import { Components } from '@npm-bbta/bbog-dig-dt-sherpa-lib';
 
 @Component({
   selector: 'app-users',
   standalone: true,
   templateUrl: './users.component.html',
-  imports: [AsyncPipe],
+  imports: [AsyncPipe, NewUserComponent],
   styleUrls: ['./users.component.scss'],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class UsersComponent implements OnInit {
   private readonly route = inject(ActivatedRoute);
   private readonly router = inject(Router);
+
+  @ViewChild('drawer')
+  private readonly drawerRef?: ElementRef<Components.SpMlDrawer>;
 
   tableItems: any[] = [];
 
@@ -67,6 +72,15 @@ export class UsersComponent implements OnInit {
     } else {
       await this.listUsers();
     }
+  }
+
+  openDrawer() {
+    this.drawerRef?.nativeElement.openDrawer();
+  }
+
+  handleUserCreated() {
+    this.drawerRef?.nativeElement.closeDrawer();
+    this.gotoPage(1);
   }
 
   private getStatusType(status: string) {
