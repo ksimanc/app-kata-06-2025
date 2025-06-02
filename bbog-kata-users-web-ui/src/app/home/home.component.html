@@ -1,0 +1,69 @@
+<h1 class="sp-text-heading-4">Gestión de Ingresos y Recursos de Equipo</h1>
+
+<div class="card-container">
+  <sp-ml-access-card
+    title-label="Creación de Usuario"
+    desc-label="Registrar a una nueva persona en el equipo"
+    button="Registrar nuevo ingreso"
+    action="true"
+    type-icon="ico-avartars-profile-settings"
+    obfus-title="false"
+    color-text-avatar=""
+    (linkDetailClicked)="goToCreateUser()"
+  ></sp-ml-access-card>
+
+  <sp-ml-access-card
+    title-label="Solicitud de Accesos"
+    desc-label="Solicitar permisos para un nuevo miembro del equipo"
+    button="Solicitar acceso"
+    action="true"
+    type-icon="ico-login"
+    obfus-title="false"
+    color-text-avatar=""
+    (linkDetailClicked)="goToAccessRequest()"
+  ></sp-ml-access-card>
+
+  <sp-ml-access-card
+    title-label="Asignación de Computadores"
+    desc-label="Asignar un equipo portátil a un nuevo ingreso"
+    button="Asignar computador"
+    action="true"
+    type-icon="ico-laptop"
+    obfus-title="false"
+    color-text-avatar=""
+    (linkDetailClicked)="goToAssignComputer()"
+  ></sp-ml-access-card>
+</div>
+
+<sp-ml-dynamic-table
+  [columnTable]="[
+    { colName: '', control: 'id' },
+    { colName: 'Simple', control: 'text' },
+    { colName: 'Simple', control: 'text' },
+    { colName: 'Estado', control: 'tag' },
+    { colName: '', control: 'button' }
+  ]"
+  [rowTable]="[
+    {
+      id: '0',
+      Simple0: 'Content Text Fill',
+      Simple1: 'Content Text Fill',
+      Estado2: { type: 'success', text: 'terminado' },
+      Boton3: 'Ver más ›'
+    },
+    {
+      id: '1',
+      Simple0: 'Content Text Fill',
+      Simple1: 'Content Text Fill',
+      Estado2: { type: 'success', text: 'terminado' },
+      Boton3: 'Ver más ›'
+    },
+    {
+      id: '2',
+      Simple0: 'Content Text Fill',
+      Simple1: 'Content Text Fill',
+      Estado2: { type: 'success', text: 'terminado' },
+      Boton3: 'Ver más ›'
+    }
+  ]"
+></sp-ml-dynamic-table>

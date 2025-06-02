@@ -1,10 +1,7 @@
 <sp-ml-header
-  back="TRUE"
-  close="TRUE"
-  icon-secundary=""
-  label-secundary=""
-  icon-tertiary=""
-  label-tertiary=""
+  [back]="showBackBtn"
+  close="FALSE"
+  (backBtnClicked)="goToHome()"
 ></sp-ml-header>
 
 <router-outlet></router-outlet>

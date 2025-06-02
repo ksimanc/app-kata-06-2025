@@ -1,0 +1,25 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1rem;
+  max-width: 50em;
+  align-items: stretch;
+  margin-inline: auto;
+}
+
+.sp-text-heading-4 {
+  text-align: center;
+}
+
+.card-container {
+  display: flex;
+  gap: inherit;
+  justify-content: center;
+  align-items: center;
+
+  > * {
+    flex: 1;
+    min-width: 0;
+  }
+}
