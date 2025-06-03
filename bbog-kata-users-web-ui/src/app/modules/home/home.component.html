@@ -4,7 +4,7 @@
   <sp-ml-access-card
     title-label="Creación de Usuario"
     desc-label="Registrar a una nueva persona en el equipo"
-    button="Registrar nuevo ingreso"
+    button="Ver ingresos"
     action="true"
     type-icon="ico-avartars-profile-settings"
     obfus-title="false"
@@ -15,7 +15,7 @@
   <sp-ml-access-card
     title-label="Solicitud de Accesos"
     desc-label="Solicitar permisos para un nuevo miembro del equipo"
-    button="Solicitar acceso"
+    button="Ver solicitudes de acceso"
     action="true"
     type-icon="ico-login"
     obfus-title="false"
@@ -34,36 +34,3 @@
     (linkDetailClicked)="goToAssignComputer()"
   ></sp-ml-access-card>
 </div>
-
-<sp-ml-dynamic-table
-  [columnTable]="[
-    { colName: '', control: 'id' },
-    { colName: 'Simple', control: 'text' },
-    { colName: 'Simple', control: 'text' },
-    { colName: 'Estado', control: 'tag' },
-    { colName: '', control: 'button' }
-  ]"
-  [rowTable]="[
-    {
-      id: '0',
-      Simple0: 'Content Text Fill',
-      Simple1: 'Content Text Fill',
-      Estado2: { type: 'success', text: 'terminado' },
-      Boton3: 'Ver más ›'
-    },
-    {
-      id: '1',
-      Simple0: 'Content Text Fill',
-      Simple1: 'Content Text Fill',
-      Estado2: { type: 'success', text: 'terminado' },
-      Boton3: 'Ver más ›'
-    },
-    {
-      id: '2',
-      Simple0: 'Content Text Fill',
-      Simple1: 'Content Text Fill',
-      Estado2: { type: 'success', text: 'terminado' },
-      Boton3: 'Ver más ›'
-    }
-  ]"
-></sp-ml-dynamic-table>
