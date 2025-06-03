@@ -1,6 +1,6 @@
 import { Component, CUSTOM_ELEMENTS_SCHEMA, inject, OnDestroy, OnInit } from '@angular/core';
 import { IOptions } from '@npm-bbta/bbog-dig-dt-sherpa-lib';
-import { BehaviorSubject, debounceTime, Subscription } from 'rxjs';
+import { BehaviorSubject, Subscription } from 'rxjs';
 import { environment } from '../../../../environment/environment';
 import { RequestFormComponent } from './components/request-form.component';
 import { BdbCustomLogger } from '@npm-bbta/sdk-ae-frontend-utils-logs-lib';
@@ -29,10 +29,10 @@ export class NewRequestComponent implements OnInit, OnDestroy {
 
   selectedUser?: any;
 
-  private readonly ctrl = new AbortController();
+  private ctrl?: AbortController;
 
   ngOnInit(): void {
-    this.usersSub = this.querySubject.pipe(debounceTime(1000)).subscribe(async (query) => {
+    this.usersSub = this.querySubject.subscribe(async (query) => {
       if (query.length < 1) {
         this.usersOptions = [];
         return;
@@ -53,6 +53,7 @@ export class NewRequestComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.usersSub?.unsubscribe();
+    this.ctrl?.abort();
   }
 
   updateQuery(query: string) {
@@ -61,22 +62,34 @@ export class NewRequestComponent implements OnInit, OnDestroy {
     }
 
     this.selectedUser = undefined;
-    this.ctrl.abort();
+    this.ctrl?.abort();
+    this.ctrl = new AbortController();
     this.querySubject.next(query);
   }
 
   selectUser(user: any) {
     this.selectedUser = user;
-    this.ctrl.abort();
+    this.ctrl?.abort();
   }
 
   async searchUsers(query: string) {
     const endpoint = `${environment.apiUrl}/kata-users-mngr/V1/users/search?q=${query}`;
 
-    const res = await fetch(endpoint);
-    const data = await res.json();
+    try {
+      const res = await fetch(endpoint, {
+        signal: this.ctrl?.signal,
+      });
 
-    return data.users;
+      const data = await res.json();
+
+      return data.users;
+    } catch (err) {
+      if (err instanceof DOMException && err.name === 'AbortError') {
+        logger.debug('Search request aborted');
+        return [];
+      }
+      throw err;
+    }
   }
 
   gotoList() {

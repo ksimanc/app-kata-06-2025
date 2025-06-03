@@ -9,7 +9,7 @@ import {
   Output,
 } from '@angular/core';
 import { IOptions } from '@npm-bbta/bbog-dig-dt-sherpa-lib';
-import { BehaviorSubject, Subscription, debounceTime } from 'rxjs';
+import { BehaviorSubject, Subscription } from 'rxjs';
 import { environment } from '../../../../../../environment/environment';
 import { ToastService } from '../../../../../services/toast.service';
 
@@ -41,10 +41,10 @@ export class AssignComputerComponent implements OnInit, OnDestroy {
 
   selectedUser?: any;
 
-  private readonly ctrl = new AbortController();
+  private ctrl?: AbortController;
 
   ngOnInit(): void {
-    this.sub = this.querySubject.pipe(debounceTime(1000)).subscribe(async (query) => {
+    this.sub = this.querySubject.subscribe(async (query) => {
       if (query.length < 1) {
         this.options = [];
         return;
@@ -61,6 +61,7 @@ export class AssignComputerComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.sub?.unsubscribe();
+    this.ctrl?.abort();
   }
 
   updateQuery(query: string) {
@@ -69,22 +70,33 @@ export class AssignComputerComponent implements OnInit, OnDestroy {
     }
 
     this.selectedUser = undefined;
-    this.ctrl.abort();
+    this.ctrl?.abort();
+    this.ctrl = new AbortController();
     this.querySubject.next(query);
   }
 
   selectUser(user: any) {
     this.selectedUser = user;
-    this.ctrl.abort();
+    this.ctrl?.abort();
   }
 
   async searchUsers(query: string) {
     const endpoint = `${environment.apiUrl}/kata-users-mngr/V1/computers/search-users?q=${query}`;
 
-    const res = await fetch(endpoint);
-    const data = await res.json();
+    try {
+      const res = await fetch(endpoint, {
+        signal: this.ctrl?.signal,
+      });
+      const data = await res.json();
+      return data.users;
+    } catch (err) {
+      if (err instanceof DOMException && err.name === 'AbortError') {
+        console.debug('Search request aborted');
+        return [];
+      }
 
-    return data.users;
+      throw err;
+    }
   }
 
   async assignComputer() {
@@ -103,7 +115,6 @@ export class AssignComputerComponent implements OnInit, OnDestroy {
         computerId: this.computer.id,
         userId: this.selectedUser.id,
       }),
-      signal: this.ctrl.signal,
     });
 
     if (res.status === 201) {
