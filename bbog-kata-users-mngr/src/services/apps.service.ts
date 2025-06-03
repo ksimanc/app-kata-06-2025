@@ -1,6 +1,6 @@
 import { and, count, desc, eq, inArray, isNull, or } from 'drizzle-orm';
 import { db } from '../db';
-import { AccessRequests, Apps, Users } from '../db/schema';
+import { AccessRequests, AccessRequestStatus, Apps, Users } from '../db/schema';
 
 class AppsServiceClass {
   getAccessRequests(page = 1, pageSize = 10) {
@@ -73,6 +73,14 @@ class AppsServiceClass {
     const appsWithAccessRequestIds = appsWithAccessRequest.map((app) => app.appId);
 
     return apps.filter((app) => !appsWithAccessRequestIds.includes(app.id));
+  }
+
+  updateAccessRequestStatus(requestId: number, status: AccessRequestStatus) {
+    return db
+      .update(AccessRequests)
+      .set({ status })
+      .where(eq(AccessRequests.id, requestId))
+      .returning({ status: AccessRequests.status });
   }
 }
 

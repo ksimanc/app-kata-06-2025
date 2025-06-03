@@ -40,4 +40,17 @@ AppsController.post('/access-request', async (req, res) => {
   }
 });
 
+AppsController.put('/access-request/:id', async (req, res) => {
+  try {
+    const accessRequestId = parseInt(req.params.id);
+    const { status } = req.body;
+
+    const data = await AppsService.updateAccessRequestStatus(accessRequestId, status);
+
+    res.status(201).json(data);
+  } catch (error) {
+    console.log(error);
+    res.send(500).send(error + '');
+  }
+});
 export { AppsController };

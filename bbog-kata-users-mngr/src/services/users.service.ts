@@ -31,7 +31,7 @@ class UsersServiceClass {
   }
 
   updateUserStatus(id: number, status: UserStatus) {
-    return db.update(Users).set({ status }).where(eq(Users.id, id));
+    return db.update(Users).set({ status }).where(eq(Users.id, id)).returning();
   }
 }
 

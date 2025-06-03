@@ -76,10 +76,13 @@ class ComputersServiceClass {
   }
 
   registerComputer(model: string, serialNumber: string) {
-    return db.insert(Computers).values({
-      model,
-      serialNumber,
-    });
+    return db
+      .insert(Computers)
+      .values({
+        model,
+        serialNumber,
+      })
+      .returning();
   }
 }
 

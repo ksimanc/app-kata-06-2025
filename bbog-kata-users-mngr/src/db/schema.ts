@@ -40,7 +40,7 @@ export const Apps = pg.pgTable('apps', {
   updatedAt,
 });
 
-type AccessRequestStatus = 'Pendiente' | 'Aprobado' | 'Rechazado' | 'Cancelado';
+export type AccessRequestStatus = 'Pendiente' | 'Aprobado' | 'Rechazado' | 'Cancelado';
 
 export const AccessRequests = pg.pgTable('access_requests', {
   id: pg.serial().primaryKey(),
@@ -58,7 +58,7 @@ export const AccessRequests = pg.pgTable('access_requests', {
   updatedAt,
 });
 
-type ComputerStatus = 'Disponible' | 'Asignado' | 'En mantenimiento';
+export type ComputerStatus = 'Disponible' | 'Asignado' | 'En mantenimiento';
 
 export const Computers = pg.pgTable('computers', {
   id: pg.serial().primaryKey(),
@@ -70,7 +70,7 @@ export const Computers = pg.pgTable('computers', {
   updatedAt,
 });
 
-type ComputerAssignmentStatus = 'Activo' | 'Devuelto';
+export type ComputerAssignmentStatus = 'Activo' | 'Devuelto';
 
 export const ComputerAssignments = pg.pgTable('computer_assignments', {
   id: pg.serial().primaryKey(),

@@ -47,9 +47,9 @@ UsersController.put('/:id', async (req: Request, res: Response) => {
     const userId = parseInt(req.params.id);
     const { status } = req.body;
 
-    await UsersService.updateUserStatus(userId, status);
+    const user = await UsersService.updateUserStatus(userId, status);
 
-    res.status(204).send();
+    res.status(201).json(user);
   } catch (error) {
     console.log(error);
     res.send(500).send(error + '');
