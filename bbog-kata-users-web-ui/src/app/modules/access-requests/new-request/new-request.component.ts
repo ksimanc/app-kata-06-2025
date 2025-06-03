@@ -27,7 +27,7 @@ export class NewRequestComponent implements OnInit, OnDestroy {
 
   private usersSub?: Subscription;
 
-  selectedUserId?: string;
+  selectedUser?: string;
 
   ngOnInit(): void {
     this.usersSub = this.querySubject.pipe(debounceTime(1000)).subscribe(async (query) => {
@@ -42,7 +42,7 @@ export class NewRequestComponent implements OnInit, OnDestroy {
 
       this.usersOptions = users.map((user: any) => ({
         text: user.name,
-        value: user.id,
+        value: user,
       }));
 
       logger.debug('Users options:', this.usersOptions);
@@ -54,8 +54,7 @@ export class NewRequestComponent implements OnInit, OnDestroy {
   }
 
   updateQuery(query: string) {
-    this.selectedUserId = undefined;
-
+    this.selectedUser = undefined;
     this.querySubject.next(query);
   }
 

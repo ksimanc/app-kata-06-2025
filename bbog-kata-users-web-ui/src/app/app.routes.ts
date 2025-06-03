@@ -33,4 +33,9 @@ export const routes: Routes = [
       },
     ],
   },
+  {
+    path: 'computers',
+    title: 'Computadores',
+    loadComponent: () => import('./modules/computers/computers.component').then((m) => m.ComputersComponent),
+  },
 ];

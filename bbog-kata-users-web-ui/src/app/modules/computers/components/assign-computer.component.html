@@ -1,0 +1,21 @@
+<sp-at-autocomplete
+  required="true"
+  label="Nombre del colaborador"
+  placeholder="Escribe aquí el nombre"
+  status="ENABLED"
+  message=""
+  [options]="options"
+  (eventQueryChanged)="updateQuery($event.detail.text)"
+  (eventOptionSelected)="selectedUser = $event.detail.value"
+></sp-at-autocomplete>
+
+@if (selectedUser) {
+<sp-ml-card-list
+  hidden-arrow
+  [valuesCardList]="[{ title: selectedUser.name, avatar: { text: selectedUser.name }, desc: selectedUser.email }]"
+></sp-ml-card-list>
+}
+
+<button class="sp-at-btn sp-at-btn--primary sp-at-btn--lg" [disabled]="!selectedUser" (click)="assignComputer()">
+  Asignar
+</button>

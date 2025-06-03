@@ -1,10 +1,8 @@
 import { Component, CUSTOM_ELEMENTS_SCHEMA, ElementRef, EventEmitter, inject, Output, ViewChild } from '@angular/core';
 import { IOptions } from '@npm-bbta/bbog-dig-dt-sherpa-lib/dist/types/utils/OptionsEnum/IOptions';
-import { LoaderService } from '../../../services/loader.service';
 import { ToastService } from '../../../services/toast.service';
 import { Components } from '@npm-bbta/bbog-dig-dt-sherpa-lib';
 import { environment } from '../../../../environment/environment';
-import { DevService } from '../../../services/dev.service';
 
 @Component({
   selector: 'app-new-user',
@@ -14,9 +12,7 @@ import { DevService } from '../../../services/dev.service';
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class NewUserComponent {
-  private readonly loader = inject(LoaderService);
   private readonly toast = inject(ToastService);
-  private readonly dev = inject(DevService);
 
   @ViewChild('name') nameInputRef?: ElementRef<Components.SpAtInput>;
   @ViewChild('email') emailInputRef?: ElementRef<Components.SpAtAutocomplete>;
@@ -63,10 +59,6 @@ export class NewUserComponent {
   async registerUser() {
     const endpoint = `${environment.apiUrl}/kata-users-mngr/V1/users`;
 
-    this.loader.openLoader();
-
-    await this.dev.sleep(2000);
-
     const res = await fetch(endpoint, {
       method: 'POST',
       headers: {
@@ -74,8 +66,6 @@ export class NewUserComponent {
       },
       body: JSON.stringify(this.userData),
     });
-
-    this.loader.closeLoader();
 
     if (res.ok) {
       this.toast.showToast('SUCCESS', 'Usuario creado correctamente');

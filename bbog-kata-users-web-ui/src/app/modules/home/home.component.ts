@@ -20,6 +20,6 @@ export class HomeComponent {
   }
 
   goToAssignComputer() {
-    console.log('Asignar equipo');
+    this.router.navigate(['computers']);
   }
 }

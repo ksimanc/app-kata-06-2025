@@ -2,10 +2,20 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 2rem;
-  max-width: 50em;
+  gap: 1rem;
+  width: min(80%, 60em);
   align-items: stretch;
   margin-inline: auto;
+}
+
+.buttons {
+  display: flex;
+  justify-content: end;
+  gap: 1rem;
+
+  button {
+    width: fit-content;
+  }
 }
 
 .sp-text-heading-4 {

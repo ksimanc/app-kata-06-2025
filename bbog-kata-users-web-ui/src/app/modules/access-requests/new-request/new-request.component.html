@@ -2,15 +2,15 @@
 
 <sp-at-autocomplete
   required="true"
-  label="Label"
-  placeholder="Placeholder"
+  label="Nombre del colaborador"
+  placeholder="Escribe aquí el nombre"
   status="ENABLED"
   message=""
   [options]="usersOptions"
   (eventQueryChanged)="updateQuery($event.detail.text)"
-  (eventOptionSelected)="selectedUserId = $event.detail.value"
+  (eventOptionSelected)="selectedUser = $event.detail.value"
 ></sp-at-autocomplete>
 
-@if (selectedUserId) {
-<app-request-form [userId]="selectedUserId" (submit)="gotoList()"></app-request-form>
+@if (selectedUser) {
+<app-request-form [user]="selectedUser" (submit)="gotoList()"></app-request-form>
 }

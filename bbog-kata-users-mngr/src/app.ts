@@ -4,6 +4,7 @@ import { responseHandler } from 'express-intercept';
 import { deflateRawSync } from 'node:zlib';
 import { UsersController } from './controllers/users.controller';
 import { AppsController } from './controllers/apps.controller';
+import { ComputersController } from './controllers/computers.controller';
 
 const app = express();
 app.disable('x-powered-by');
@@ -30,5 +31,6 @@ const API_PATH = '/kata-users-mngr/V1';
 
 app.use(`${API_PATH}/users`, UsersController);
 app.use(`${API_PATH}/apps`, AppsController);
+app.use(`${API_PATH}/computers`, ComputersController);
 
 export default app;
