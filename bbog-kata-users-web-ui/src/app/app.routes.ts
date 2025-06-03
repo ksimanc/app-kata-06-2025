@@ -44,6 +44,12 @@ export const routes: Routes = [
         loadComponent: () =>
           import('./modules/computers/list-computers/list-computers.component').then((m) => m.ListComputersComponent),
       },
+      {
+        path: 'history',
+        title: 'Historial de Asignaciones',
+        loadComponent: () =>
+          import('./modules/computers/assign-history/assign-history.component').then((m) => m.AssignHistoryComponent),
+      },
     ],
   },
 ];

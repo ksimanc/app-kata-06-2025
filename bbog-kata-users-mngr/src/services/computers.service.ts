@@ -1,7 +1,6 @@
 import { and, count, desc, eq, ilike, isNull } from 'drizzle-orm';
 import { db } from '../db';
 import { ComputerAssignments, Computers, Users } from '../db/schema';
-import { serial } from 'drizzle-orm/mysql-core';
 
 class ComputersServiceClass {
   listComputers(page = 1, pageSize = 10) {
@@ -46,6 +45,34 @@ class ComputersServiceClass {
         userId,
       });
     });
+  }
+
+  async getAssignmentHistory(page = 1, pageSize = 10) {
+    const offset = (page - 1) * pageSize;
+
+    return db
+      .select({
+        assignedAt: ComputerAssignments.createdAt,
+        returnedAt: ComputerAssignments.returnDate,
+        user: {
+          name: Users.name,
+        },
+        computer: {
+          model: Computers.model,
+          serialNumber: Computers.serialNumber,
+        },
+      })
+      .from(ComputerAssignments)
+      .innerJoin(Computers as any, eq(ComputerAssignments.computerId, Computers.id))
+      .innerJoin(Users as any, eq(ComputerAssignments.userId, Users.id))
+      .offset(offset)
+      .limit(pageSize)
+      .orderBy(desc(ComputerAssignments.createdAt));
+  }
+
+  async countAssignmentHistory() {
+    const [res] = await db.select({ count: count(ComputerAssignments.id) }).from(ComputerAssignments);
+    return res.count;
   }
 }
 

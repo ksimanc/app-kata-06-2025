@@ -87,6 +87,12 @@ export class ListComputersComponent {
     this.gotoPage(1);
   }
 
+  gotoHistory() {
+    this.router.navigate(['history'], {
+      relativeTo: this.route,
+    });
+  }
+
   private getStatusType(status: string) {
     switch (status) {
       case 'Disponible':

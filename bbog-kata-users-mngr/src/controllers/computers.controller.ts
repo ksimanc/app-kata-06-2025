@@ -40,4 +40,18 @@ ComputersController.post('/assign', async (req: Request, res: Response) => {
   }
 });
 
+ComputersController.get('/history', async (req: Request, res: Response) => {
+  try {
+    const page = parseInt(req.query.page as string) || 1;
+
+    res.json({
+      history: await ComputersService.getAssignmentHistory(page),
+      total: await ComputersService.countAssignmentHistory(),
+    });
+  } catch (error) {
+    console.log(error);
+    res.send(500).send(error + '');
+  }
+});
+
 export { ComputersController };

@@ -1,6 +1,11 @@
 <h1 class="sp-text-heading-4">Gestión de Computadores</h1>
 
-<div class="buttons"></div>
+<div class="buttons">
+  <button class="sp-at-btn sp-at-btn--tertiary sp-at-btn--lg--ico" (click)="gotoHistory()">
+    <span class="ico-look"></span>
+    Ver historial
+  </button>
+</div>
 
 <sp-ml-dynamic-table
   [columnTable]="[
