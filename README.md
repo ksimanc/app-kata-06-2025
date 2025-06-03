@@ -25,7 +25,7 @@ Una aplicación full-stack para la gestión de usuarios, computadoras y solicitu
 
 ### Prerrequisitos
 
-- Docker y Docker Compose
+- Docker y Docker Compose (lo puedes instalar [aquí](https://docs.docker.com/desktop/))
 - Node.js (recomendado para desarrollo local)
 - Git
 
