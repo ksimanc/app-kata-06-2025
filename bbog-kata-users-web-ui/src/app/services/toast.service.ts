@@ -11,7 +11,7 @@ export class ToastService {
     this.toast.type = type;
     this.toast.message = message;
 
-    document.body.append(this.toast);
+    document.body.prepend(this.toast);
 
     await this.toast.show();
   }
