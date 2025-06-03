@@ -18,7 +18,7 @@ export const userRoles = [
 ] as const;
 
 export type UserRole = (typeof userRoles)[number];
-type UserStatus = 'Pendiente' | 'Aprobado' | 'Rechazado';
+export type UserStatus = 'Pendiente' | 'Aprobado' | 'Rechazado';
 
 export const Users = pg.pgTable('users', {
   id: pg.serial().primaryKey(),

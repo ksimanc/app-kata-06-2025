@@ -1,6 +1,6 @@
 import { and, count, desc, eq, ilike } from 'drizzle-orm';
 import { db } from '../db';
-import { Users } from '../db/schema';
+import { Users, UserStatus } from '../db/schema';
 import { RegisterUserInput } from '../model/user';
 
 class UsersServiceClass {
@@ -25,6 +25,10 @@ class UsersServiceClass {
       .from(Users)
       .where(and(ilike(Users.name, `%${query}%`), eq(Users.status, 'Aprobado')))
       .limit(10);
+  }
+
+  updateUserStatus(id: number, status: UserStatus) {
+    return db.update(Users).set({ status }).where(eq(Users.id, id));
   }
 }
 

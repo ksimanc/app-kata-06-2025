@@ -42,4 +42,18 @@ UsersController.post('/', async (req: Request, res: Response) => {
   }
 });
 
+UsersController.put('/:id', async (req: Request, res: Response) => {
+  try {
+    const userId = parseInt(req.params.id);
+    const { status } = req.body;
+
+    await UsersService.updateUserStatus(userId, status);
+
+    res.status(204).send();
+  } catch (error) {
+    console.log(error);
+    res.send(500).send(error + '');
+  }
+});
+
 export { UsersController };
