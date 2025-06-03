@@ -41,6 +41,8 @@ export class AssignComputerComponent implements OnInit, OnDestroy {
 
   selectedUser?: any;
 
+  private readonly ctrl = new AbortController();
+
   ngOnInit(): void {
     this.sub = this.querySubject.pipe(debounceTime(1000)).subscribe(async (query) => {
       if (query.length < 1) {
@@ -62,8 +64,18 @@ export class AssignComputerComponent implements OnInit, OnDestroy {
   }
 
   updateQuery(query: string) {
+    if (this.selectedUser?.name === query) {
+      return;
+    }
+
     this.selectedUser = undefined;
+    this.ctrl.abort();
     this.querySubject.next(query);
+  }
+
+  selectUser(user: any) {
+    this.selectedUser = user;
+    this.ctrl.abort();
   }
 
   async searchUsers(query: string) {
@@ -91,6 +103,7 @@ export class AssignComputerComponent implements OnInit, OnDestroy {
         computerId: this.computer.id,
         userId: this.selectedUser.id,
       }),
+      signal: this.ctrl.signal,
     });
 
     if (res.status === 201) {

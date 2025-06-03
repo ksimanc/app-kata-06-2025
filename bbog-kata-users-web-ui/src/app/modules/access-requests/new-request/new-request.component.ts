@@ -27,7 +27,9 @@ export class NewRequestComponent implements OnInit, OnDestroy {
 
   private usersSub?: Subscription;
 
-  selectedUser?: string;
+  selectedUser?: any;
+
+  private readonly ctrl = new AbortController();
 
   ngOnInit(): void {
     this.usersSub = this.querySubject.pipe(debounceTime(1000)).subscribe(async (query) => {
@@ -54,8 +56,18 @@ export class NewRequestComponent implements OnInit, OnDestroy {
   }
 
   updateQuery(query: string) {
+    if (this.selectedUser?.name === query) {
+      return;
+    }
+
     this.selectedUser = undefined;
+    this.ctrl.abort();
     this.querySubject.next(query);
+  }
+
+  selectUser(user: any) {
+    this.selectedUser = user;
+    this.ctrl.abort();
   }
 
   async searchUsers(query: string) {

@@ -6,7 +6,7 @@
   message=""
   [options]="options"
   (eventQueryChanged)="updateQuery($event.detail.text)"
-  (eventOptionSelected)="selectedUser = $event.detail.value"
+  (eventOptionSelected)="selectUser($event.detail.value)"
 ></sp-at-autocomplete>
 
 @if (selectedUser) {
