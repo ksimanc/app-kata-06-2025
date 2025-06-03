@@ -54,4 +54,14 @@ ComputersController.get('/history', async (req: Request, res: Response) => {
   }
 });
 
+ComputersController.post('/', async (req: Request, res: Response) => {
+  try {
+    await ComputersService.registerComputer(req.body.model, req.body.serialNumber);
+    res.status(201).send();
+  } catch (error) {
+    console.log(error);
+    res.send(500).send(error + '');
+  }
+});
+
 export { ComputersController };

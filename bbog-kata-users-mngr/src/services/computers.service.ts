@@ -74,6 +74,13 @@ class ComputersServiceClass {
     const [res] = await db.select({ count: count(ComputerAssignments.id) }).from(ComputerAssignments);
     return res.count;
   }
+
+  registerComputer(model: string, serialNumber: string) {
+    return db.insert(Computers).values({
+      model,
+      serialNumber,
+    });
+  }
 }
 
 export const ComputersService = new ComputersServiceClass();

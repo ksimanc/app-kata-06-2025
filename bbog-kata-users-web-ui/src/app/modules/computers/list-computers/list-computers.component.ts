@@ -24,6 +24,9 @@ export class ListComputersComponent {
   @ViewChild('assignDrawer')
   assignDrawer?: ElementRef<Components.SpMlDrawer>;
 
+  @ViewChild('registerDrawer')
+  registerDrawer?: ElementRef<Components.SpMlDrawer>;
+
   tableItems: any[] = [];
 
   currentPage$ = this.route.queryParams.pipe(
@@ -83,8 +86,13 @@ export class ListComputersComponent {
     this.assignDrawer?.nativeElement.openDrawer();
   }
 
+  openRegisterDrawer() {
+    this.registerDrawer?.nativeElement.openDrawer();
+  }
+
   handleSubmit() {
     this.assignDrawer?.nativeElement.closeDrawer();
+    this.registerDrawer?.nativeElement.closeDrawer();
     this.gotoPage(1);
   }
 

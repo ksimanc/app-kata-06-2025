@@ -1,0 +1,25 @@
+<sp-at-input
+  label="Modelo"
+  message=""
+  placeholder="Modelo del equipo"
+  type="TEXT"
+  status="ENABLED"
+  required="true"
+  (atInputChanged)="computerData.model = $event.detail.value"
+></sp-at-input>
+
+<sp-at-input
+  label="Número de serie"
+  message=""
+  placeholder="Número de serie del equipo"
+  type="TEXT"
+  status="ENABLED"
+  required="true"
+  (atInputChanged)="computerData.serialNumber = $event.detail.value"
+></sp-at-input>
+
+<div></div>
+
+<button class="sp-at-btn sp-at-btn--primary sp-at-btn--lg" [disabled]="!showBtn" (click)="registerComputer()">
+  Registrar
+</button>
