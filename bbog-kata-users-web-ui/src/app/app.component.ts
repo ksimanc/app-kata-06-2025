@@ -1,6 +1,6 @@
 import { Location } from '@angular/common';
 import { Component, CUSTOM_ELEMENTS_SCHEMA, inject } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -12,12 +12,13 @@ import { RouterOutlet } from '@angular/router';
 })
 export class AppComponent {
   private readonly _location = inject(Location);
+  private readonly router = inject(Router);
 
   get showBackBtn() {
     return !!this._location.path();
   }
 
   goBack() {
-    this._location.back();
+    this.router.navigate(['']);
   }
 }
