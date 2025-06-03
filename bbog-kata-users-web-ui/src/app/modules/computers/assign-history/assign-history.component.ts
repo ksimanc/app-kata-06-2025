@@ -53,7 +53,7 @@ export class AssignHistoryComponent {
       serialNumber: i.computer.serialNumber,
       user: i.user.name,
       assignedAt: this.dateFmt.format(new Date(i.assignedAt)),
-      returnedAt: i.returnedAt ? this.dateFmt.format(new Date(i.returnedAt)) : 'No devuelto',
+      returnedAt: i.returnedAt ? this.dateFmt.format(new Date(i.returnedAt)) : '',
     }));
   }
 
