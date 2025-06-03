@@ -49,6 +49,9 @@ Una aplicación full-stack para la gestión de usuarios, computadoras y solicitu
    sh ./scripts/dev.sh
    ```
 
+> [!NOTE]
+> En MacOS debes abrir Docker Desktop para poder ejecutar contenedores.
+
 Este comando realizará:
 - Creación de una red Docker con todos los contenedores requeridos
 - Inicio del servidor de desarrollo de Angular
