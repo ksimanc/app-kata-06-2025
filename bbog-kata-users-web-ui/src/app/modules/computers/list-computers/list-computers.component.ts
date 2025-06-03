@@ -3,13 +3,14 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Components } from '@npm-bbta/bbog-dig-dt-sherpa-lib';
 import { map } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
-import { AssignComputerComponent } from './components/assign-computer.component';
+import { AssignComputerComponent } from './components/assign-computer/assign-computer.component';
 import { environment } from '../../../../environment/environment';
+import { RegisterComputerComponent } from './components/register-computer/register-computer.component';
 
 @Component({
   selector: 'app-computers',
   standalone: true,
-  imports: [AsyncPipe, AssignComputerComponent],
+  imports: [AsyncPipe, AssignComputerComponent, RegisterComputerComponent],
   templateUrl: './list-computers.component.html',
   styleUrls: ['./list-computers.component.scss'],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
