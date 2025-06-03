@@ -1,4 +1,4 @@
-import { and, count, desc, eq, isNull, or } from 'drizzle-orm';
+import { and, count, desc, eq, inArray, isNull, or } from 'drizzle-orm';
 import { db } from '../db';
 import { AccessRequests, Apps, Users } from '../db/schema';
 
@@ -54,17 +54,25 @@ class AppsServiceClass {
       throw new Error('User not found');
     }
 
-    return db
+    const apps = await db
       .select({
         id: Apps.id,
         name: Apps.name,
         description: Apps.description,
-        requiredRole: Apps.requiredRole,
       })
       .from(Apps)
-      .innerJoin(AccessRequests as any, eq(Apps.id, AccessRequests.appId))
-      .where(and(or(isNull(Apps.requiredRole), eq(Apps.requiredRole, user.role))))
-      .orderBy(desc(Apps.name));
+      .where(or(isNull(Apps.requiredRole), eq(Apps.requiredRole, user.role)));
+
+    const appIds = apps.map((app) => app.id);
+
+    const appsWithAccessRequest = await db
+      .select({ appId: AccessRequests.appId })
+      .from(AccessRequests)
+      .where(and(eq(AccessRequests.userId, +userId), inArray(AccessRequests.appId, appIds)));
+
+    const appsWithAccessRequestIds = appsWithAccessRequest.map((app) => app.appId);
+
+    return apps.filter((app) => !appsWithAccessRequestIds.includes(app.id));
   }
 }
 

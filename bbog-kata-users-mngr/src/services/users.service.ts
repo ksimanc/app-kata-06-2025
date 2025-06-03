@@ -20,6 +20,9 @@ class UsersServiceClass {
   }
 
   async searchUser(query: string) {
+    // const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+    // await sleep(1000);
+
     return db
       .select({ id: Users.id, name: Users.name, role: Users.role })
       .from(Users)
