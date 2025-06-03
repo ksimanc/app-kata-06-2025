@@ -11,3 +11,9 @@
 .sp-text-heading-4 {
   text-align: center;
 }
+
+.autocomplete {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}

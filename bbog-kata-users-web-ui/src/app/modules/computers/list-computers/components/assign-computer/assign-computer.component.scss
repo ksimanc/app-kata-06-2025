@@ -6,3 +6,9 @@
   align-items: stretch;
   margin-inline: auto;
 }
+
+.autocomplete {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}

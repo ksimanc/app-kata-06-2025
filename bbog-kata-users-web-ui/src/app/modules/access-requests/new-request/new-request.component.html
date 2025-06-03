@@ -1,15 +1,21 @@
 <h1 class="sp-text-heading-4">Solicitar Permisos en Apps</h1>
 
-<sp-at-autocomplete
-  required="true"
-  label="Nombre del colaborador"
-  placeholder="Escribe aquí el nombre"
-  status="ENABLED"
-  message="Solo se mostrarán usuarios aprobados"
-  [options]="usersOptions"
-  (eventQueryChanged)="updateQuery($event.detail.text)"
-  (eventOptionSelected)="selectUser($event.detail.value)"
-></sp-at-autocomplete>
+<div class="autocomplete">
+  <sp-at-autocomplete
+    required="true"
+    label="Nombre del colaborador"
+    placeholder="Escribe aquí el nombre"
+    status="ENABLED"
+    icon="ico-search"
+    [options]="usersOptions"
+    (eventQueryChanged)="updateQuery($event.detail.text)"
+    (eventOptionSelected)="selectUser($event.detail.value)"
+  ></sp-at-autocomplete>
+
+  @if (!selectedUser) {
+  <div class="sp-text-label-1">Solo se mostrarán usuarios aprobados</div>
+  }
+</div>
 
 @if (selectedUser) {
 <app-request-form [user]="selectedUser" (submit)="gotoList()"></app-request-form>

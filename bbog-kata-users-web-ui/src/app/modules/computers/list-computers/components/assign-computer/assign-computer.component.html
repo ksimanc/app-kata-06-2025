@@ -1,13 +1,19 @@
-<sp-at-autocomplete
-  required="true"
-  label="Nombre del colaborador"
-  placeholder="Escribe aquí el nombre"
-  status="ENABLED"
-  message="Solo se mostrarán usuarios aprobados que no tengan un equipo asignado"
-  [options]="options"
-  (eventQueryChanged)="updateQuery($event.detail.text)"
-  (eventOptionSelected)="selectUser($event.detail.value)"
-></sp-at-autocomplete>
+<div class="autocomplete">
+  <sp-at-autocomplete
+    required="true"
+    label="Nombre del colaborador"
+    placeholder="Escribe aquí el nombre"
+    status="ENABLED"
+    icon="ico-search"
+    [options]="options"
+    (eventQueryChanged)="updateQuery($event.detail.text)"
+    (eventOptionSelected)="selectUser($event.detail.value)"
+  ></sp-at-autocomplete>
+
+  @if (!selectedUser) {
+  <div class="sp-text-label-1">Solo se mostrarán usuarios aprobados que no tengan un equipo asignado</div>
+  }
+</div>
 
 @if (selectedUser) {
 <sp-ml-card-list
