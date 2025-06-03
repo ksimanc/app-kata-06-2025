@@ -40,6 +40,10 @@ Una aplicación full-stack para la gestión de usuarios, computadoras y solicitu
 2. Crear archivo de entorno:
    - Copiar `.env.example` a `.env`
 
+    ```
+    cp .env.example .env
+    ```
+
 3. Iniciar el entorno de desarrollo:
    ```sh
    sh ./scripts/dev.sh
