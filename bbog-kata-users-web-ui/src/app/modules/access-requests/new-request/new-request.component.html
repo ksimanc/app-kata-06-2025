@@ -5,7 +5,7 @@
   label="Nombre del colaborador"
   placeholder="Escribe aquí el nombre"
   status="ENABLED"
-  message=""
+  message="Solo se mostrarán usuarios aprobados"
   [options]="usersOptions"
   (eventQueryChanged)="updateQuery($event.detail.text)"
   (eventOptionSelected)="selectUser($event.detail.value)"
