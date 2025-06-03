@@ -10,8 +10,8 @@ import {
 } from '@angular/core';
 import { IOptions } from '@npm-bbta/bbog-dig-dt-sherpa-lib';
 import { BehaviorSubject, Subscription, debounceTime } from 'rxjs';
-import { environment } from '../../../../environment/environment';
-import { ToastService } from '../../../services/toast.service';
+import { environment } from '../../../../../environment/environment';
+import { ToastService } from '../../../../services/toast.service';
 
 @Component({
   selector: 'app-assign-computer',

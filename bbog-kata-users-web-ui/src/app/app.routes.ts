@@ -37,5 +37,13 @@ export const routes: Routes = [
     path: 'computers',
     title: 'Computadores',
     loadComponent: () => import('./modules/computers/computers.component').then((m) => m.ComputersComponent),
+    children: [
+      {
+        path: '',
+        title: 'Computadores',
+        loadComponent: () =>
+          import('./modules/computers/list-computers/list-computers.component').then((m) => m.ListComputersComponent),
+      },
+    ],
   },
 ];
