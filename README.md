@@ -33,13 +33,12 @@ Una aplicación full-stack para la gestión de usuarios, computadoras y solicitu
 
 1. Clonar el repositorio:
    ```sh
-   git clone [repository-url]
-   cd [repository-name]
+   git clone https://github.com/ksimanc/app-kata-06-2025.git
+   cd app-kata-06-2025
    ```
 
 2. Crear archivo de entorno:
    - Copiar `.env.example` a `.env`
-   - Actualizar las variables según sea necesario
 
 3. Iniciar el entorno de desarrollo:
    ```sh
