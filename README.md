@@ -60,6 +60,22 @@ Este comando realizará:
 - Instalación de todas las dependencias necesarias
 - Creación y población de tablas si es necesario
 
+### Base de datos
+
+Para ver la base de datos con Drizzle Studio:
+
+```sh
+cd bbog-kata-users-mngr
+```
+
+```sh
+npm i
+```
+
+```sh
+npm run db:studio
+```
+
 ### Estructura del Proyecto
 
 - `bbog-kata-users-web-ui/`: Aplicación frontend en Angular
