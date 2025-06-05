@@ -1,6 +1,6 @@
 import { Component, CUSTOM_ELEMENTS_SCHEMA, EventEmitter, inject, Output } from '@angular/core';
-import { environment } from '../../../../../../environment/environment';
 import { ToastService } from '../../../../../services/toast.service';
+import { ComputerService } from '../../../services/computer.service';
 
 @Component({
   selector: 'app-register-computer',
@@ -11,6 +11,8 @@ import { ToastService } from '../../../../../services/toast.service';
 })
 export class RegisterComputerComponent {
   private readonly toast = inject(ToastService);
+
+  private readonly computersService = inject(ComputerService);
 
   @Output() submit = new EventEmitter<void>();
 
@@ -24,15 +26,7 @@ export class RegisterComputerComponent {
   }
 
   async registerComputer() {
-    const endpoint = `${environment.apiUrl}/kata-users-mngr/V1/computers`;
-
-    const res = await fetch(endpoint, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(this.computerData),
-    });
+    const res = await this.computersService.registerComputer(this.computerData);
 
     if (res.ok) {
       this.toast.showToast('SUCCESS', 'Computador registrado correctamente');

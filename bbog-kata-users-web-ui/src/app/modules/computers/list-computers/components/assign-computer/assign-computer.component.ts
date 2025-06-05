@@ -1,17 +1,19 @@
 import {
   Component,
   CUSTOM_ELEMENTS_SCHEMA,
+  ElementRef,
   EventEmitter,
   inject,
   Input,
   OnDestroy,
   OnInit,
   Output,
+  ViewChild,
 } from '@angular/core';
-import { IOptions } from '@npm-bbta/bbog-dig-dt-sherpa-lib';
+import { Components, IOptions } from '@npm-bbta/bbog-dig-dt-sherpa-lib';
 import { BehaviorSubject, Subscription } from 'rxjs';
-import { environment } from '../../../../../../environment/environment';
 import { ToastService } from '../../../../../services/toast.service';
+import { ComputerService } from '../../../services/computer.service';
 
 @Component({
   selector: 'app-assign-computer',
@@ -31,7 +33,11 @@ export class AssignComputerComponent implements OnInit, OnDestroy {
 
   @Output() submit = new EventEmitter<void>();
 
+  @ViewChild('userInput') nameInputRef?: ElementRef<Components.SpAtInput>;
+
   private readonly toast = inject(ToastService);
+
+  private readonly computersService = inject(ComputerService);
 
   private readonly querySubject = new BehaviorSubject('');
 
@@ -81,12 +87,8 @@ export class AssignComputerComponent implements OnInit, OnDestroy {
   }
 
   async searchUsers(query: string) {
-    const endpoint = `${environment.apiUrl}/kata-users-mngr/V1/computers/search-users?q=${query}`;
-
     try {
-      const res = await fetch(endpoint, {
-        signal: this.ctrl?.signal,
-      });
+      const res = await this.computersService.searchUsers(query, this.ctrl?.signal);
       const data = await res.json();
       return data.users;
     } catch (err) {
@@ -104,22 +106,12 @@ export class AssignComputerComponent implements OnInit, OnDestroy {
       return;
     }
 
-    const endpoint = `${environment.apiUrl}/kata-users-mngr/V1/computers/assign`;
-
-    const res = await fetch(endpoint, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        computerId: this.computer.id,
-        userId: this.selectedUser.id,
-      }),
-    });
+    const res = await this.computersService.assignComputer(this.computer.id, this.selectedUser?.id);
 
     if (res.status === 201) {
       this.toast.showToast('SUCCESS', 'Computador asignado correctamente');
       this.submit.emit();
+      this.nameInputRef?.nativeElement.restartValue();
     } else {
       console.error('Failed to assign computer:', res.statusText);
     }

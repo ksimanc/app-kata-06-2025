@@ -4,8 +4,8 @@ import { Components } from '@npm-bbta/bbog-dig-dt-sherpa-lib';
 import { map } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
 import { AssignComputerComponent } from './components/assign-computer/assign-computer.component';
-import { environment } from '../../../../environment/environment';
 import { RegisterComputerComponent } from './components/register-computer/register-computer.component';
+import { ComputerService } from '../services/computer.service';
 
 @Component({
   selector: 'app-computers',
@@ -18,6 +18,8 @@ import { RegisterComputerComponent } from './components/register-computer/regist
 export class ListComputersComponent {
   private readonly route = inject(ActivatedRoute);
   private readonly router = inject(Router);
+
+  private readonly computersService = inject(ComputerService);
 
   selectedComputer?: any;
 
@@ -50,10 +52,7 @@ export class ListComputersComponent {
   });
 
   async listComputers() {
-    const endpoint = `${environment.apiUrl}/kata-users-mngr/V1/computers?page=${this.currentPage}`;
-
-    const res = await fetch(endpoint);
-    const data = await res.json();
+    const data = await this.computersService.listComputers(this.currentPage);
 
     this.pages = Math.ceil(data.total / 10);
 

@@ -1,8 +1,8 @@
 import { Component, CUSTOM_ELEMENTS_SCHEMA, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { map } from 'rxjs';
-import { environment } from '../../../../environment/environment';
 import { AsyncPipe } from '@angular/common';
+import { ComputerService } from '../services/computer.service';
 
 @Component({
   selector: 'app-assign-history',
@@ -15,6 +15,8 @@ import { AsyncPipe } from '@angular/common';
 export class AssignHistoryComponent {
   private readonly route = inject(ActivatedRoute);
   private readonly router = inject(Router);
+
+  private readonly computersService = inject(ComputerService);
 
   tableItems: any[] = [];
 
@@ -39,10 +41,7 @@ export class AssignHistoryComponent {
   });
 
   async listComputers() {
-    const endpoint = `${environment.apiUrl}/kata-users-mngr/V1/computers/history?page=${this.currentPage}`;
-
-    const res = await fetch(endpoint);
-    const data = await res.json();
+    const data = await this.computersService.getHistory(this.currentPage);
 
     this.pages = Math.ceil(data.total / 10);
 

@@ -2,7 +2,7 @@ import { Component, CUSTOM_ELEMENTS_SCHEMA, ElementRef, EventEmitter, inject, Ou
 import { IOptions } from '@npm-bbta/bbog-dig-dt-sherpa-lib/dist/types/utils/OptionsEnum/IOptions';
 import { ToastService } from '../../../services/toast.service';
 import { Components } from '@npm-bbta/bbog-dig-dt-sherpa-lib';
-import { environment } from '../../../../environment/environment';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-new-user',
@@ -13,6 +13,8 @@ import { environment } from '../../../../environment/environment';
 })
 export class NewUserComponent {
   private readonly toast = inject(ToastService);
+
+  private readonly userService = inject(UserService);
 
   @ViewChild('name') nameInputRef?: ElementRef<Components.SpAtInput>;
   @ViewChild('email') emailInputRef?: ElementRef<Components.SpAtAutocomplete>;
@@ -57,15 +59,7 @@ export class NewUserComponent {
   }
 
   async registerUser() {
-    const endpoint = `${environment.apiUrl}/kata-users-mngr/V1/users`;
-
-    const res = await fetch(endpoint, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(this.userData),
-    });
+    const res = await this.userService.registerUser(this.userData);
 
     if (res.ok) {
       this.toast.showToast('SUCCESS', 'Usuario creado correctamente');

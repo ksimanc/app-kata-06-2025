@@ -1,10 +1,10 @@
 import { Component, CUSTOM_ELEMENTS_SCHEMA, ElementRef, inject, OnInit, ViewChild } from '@angular/core';
-import { environment } from '../../../environment/environment';
 import { ActivatedRoute, Router } from '@angular/router';
 import { map } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
 import { NewUserComponent } from './components/new-user.component';
 import { Components } from '@npm-bbta/bbog-dig-dt-sherpa-lib';
+import { UserService } from './services/user.service';
 
 @Component({
   selector: 'app-users',
@@ -17,6 +17,8 @@ import { Components } from '@npm-bbta/bbog-dig-dt-sherpa-lib';
 export class UsersComponent implements OnInit {
   private readonly route = inject(ActivatedRoute);
   private readonly router = inject(Router);
+
+  private readonly userService = inject(UserService);
 
   @ViewChild('drawer')
   private readonly drawerRef?: ElementRef<Components.SpMlDrawer>;
@@ -44,10 +46,7 @@ export class UsersComponent implements OnInit {
   });
 
   async listUsers() {
-    const endpoint = `${environment.apiUrl}/kata-users-mngr/V1/users?page=${this.currentPage}`;
-
-    const res = await fetch(endpoint);
-    const data = await res.json();
+    const data = await this.userService.listUsers(this.currentPage);
 
     this.pages = Math.ceil(data.total / 10);
 
